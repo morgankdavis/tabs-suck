@@ -1,0 +1,28 @@
+TODO
+
+	Stop messing with windows (trying to auto-show CP) in non-editor windows
+    Handle editor open & close!
+    "Follow First Editor" set focus to 0?
+	Save following indexes?
+		http://www.jetbrains.org/intellij/sdk/docs/basics/persisting_state_of_components.html
+		https://intellij-support.jetbrains.com/hc/en-us/community/posts/206109179-Module-based-PersistenStateComponent-not-saving-state-to-iml-file
+	Check tracking multiple projects
+	Namespace everything (don't forget plugin.xml)
+	DISABLE VERBOSE LOGGING
+	PUBLISH
+
+	(feature) Add file name at beginning of Breadcrumbs
+	(feature) Show "Following First" indication in Breadcrumbs
+	(feature) Put applicable actions in the project tree context menu
+
+	(wish) Better handle horizontal splits
+
+	(maybe?) Stop using "editor indexes"  Do everything relative.
+
+NOTES
+
+	PLUGIN DEV FORUM: https://intellij-support.jetbrains.com/hc/en-us/community/topics/200366979-IntelliJ-IDEA-Open-API-and-Plugin-Development
+	https://intellij-support.jetbrains.com/hc/en-us/community/topics/200366979-IntelliJ-IDEA-Open-API-and-Plugin-Development
+	https://intellij-support.jetbrains.com/hc/en-us/community/posts/360002869640-Get-VirtualFile-from-Editor
+	https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001940480-How-to-close-reopen-an-editor-while-preserving-its-position-in-split-panes-
+	log: tail -f ~/IdeaProjects/QuickSwitch/build/idea-sandbox/system/log/idea.log | grep QuickSwitch
