@@ -1,0 +1,56 @@
+<idea-plugin>
+    <id>net.morgankdavis.TabsSuck</id>
+    <name>Tabs Suck!</name>
+    <vendor email="mkd@marbles.xyz" url="http://www.morgankdavis.net">Morgan K. Davis</vendor>
+
+    <description><![CDATA[
+    Tabs suck!  Splits rule!.<br>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <idea-version since-build="CL-2018.3" until-build="CL-2019.*"/>
+    <depends>com.intellij.modules.clion</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <projectService serviceInterface="TabsSuckProjectComponent"
+                        serviceImplementation="TabsSuckProjectComponent"/> <!-- needed for PropertiesComponent -->
+    </extensions>
+
+    <application-components>
+        <component>
+            <!-- Interface and implementation classes are the same -->
+            <implementation-class>TabsSuckApplicationComponent</implementation-class>
+
+        </component>
+    </application-components>
+
+    <project-components>
+        <component>
+            <!-- Interface and implementation classes are the same -->
+            <implementation-class>TabsSuckProjectComponent</implementation-class>
+
+            <!-- If the "workspace" option is set "true", the component
+                 saves its state to the .iws file instead of the .ipr file.
+                 Note that the <option> element is used only if the component
+                 implements the JDOMExternalizable interface. Otherwise, the
+                 use of the <option> element takes no effect.  -->
+<!--            <option name="workspace" value="true" />-->
+
+            <!-- If the "loadForDefaultProject" tag is present, the project component is instantiated also for the default project. -->
+            <!-- <loadForDefaultProject/> -->
+        </component>
+    </project-components>
+
+<!--    <actions>-->
+<!--        <group id="TabsSuck.DebugGroup" text="Debug" description="">-->
+<!--            <add-to-group group-id="MainMenu" anchor="last"/>-->
+<!--            <action id="TabsSuck.Debug" class="DebugAction" text="Debug" />-->
+<!--        </group>-->
+<!--    </actions>-->
+</idea-plugin>

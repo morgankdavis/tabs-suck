@@ -1,9 +1,9 @@
 TODO
 
-	Stop messing with windows (trying to auto-show CP) in non-editor windows
-    Handle editor open & close!
-    "Follow First Editor" set focus to 0?
-	Save following indexes?
+    Handle editor open & close (close done) for following indexes
+	If editor is not attached to project window, at least allow Switch to Counterpart
+    Window -> Editor Tabs has things that don't make sense (and things that should be removed)
+	Save following indexes
 		http://www.jetbrains.org/intellij/sdk/docs/basics/persisting_state_of_components.html
 		https://intellij-support.jetbrains.com/hc/en-us/community/posts/206109179-Module-based-PersistenStateComponent-not-saving-state-to-iml-file
 	Check tracking multiple projects
@@ -17,7 +17,7 @@ TODO
 
 	(wish) Better handle horizontal splits
 
-	(maybe?) Stop using "editor indexes"  Do everything relative.
+	(maybe?) Stop using "editor indexes"  Get rid of "following" and do everything relative. "Swap" == "Move"
 
 NOTES
 
@@ -25,4 +25,4 @@ NOTES
 	https://intellij-support.jetbrains.com/hc/en-us/community/topics/200366979-IntelliJ-IDEA-Open-API-and-Plugin-Development
 	https://intellij-support.jetbrains.com/hc/en-us/community/posts/360002869640-Get-VirtualFile-from-Editor
 	https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001940480-How-to-close-reopen-an-editor-while-preserving-its-position-in-split-panes-
-	log: tail -f ~/IdeaProjects/QuickSwitch/build/idea-sandbox/system/log/idea.log | grep QuickSwitch
+	log: tail -f ~/tabs-suck/build/idea-sandbox/system/log/idea.log | grep Tabs

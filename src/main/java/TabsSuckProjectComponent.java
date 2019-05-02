@@ -298,9 +298,10 @@ public class TabsSuckProjectComponent implements ProjectComponent {
 
                 Editor editor = event.getEditor();
                 VirtualFile file = fileFromEditor(editor);
-                log.debug("editorCreated(), file: " + file);
+                log.debug("editorCreated(), file: " + (file != null ? file : "null"));
 
                 // null file happens at startup, and no showNotify() event will fire for it
+                // also happens for some settings panels (ex. font preview) -- not sure if showNotify() fires.
                 if (file != null) {
                     waitingForVisibleEditors.add(editor);
                 }
@@ -431,8 +432,9 @@ public class TabsSuckProjectComponent implements ProjectComponent {
 
                     public void hideNotify() {
                         VirtualFile file = fileFromEditor(editor);
-                        log.debug("hideNotify(): " + file);
-
+                        if (file != null) {
+                            log.debug("hideNotify(): " + file);
+                        }
                         visibleEditors.remove(editor);
                         updateOrderedEditors();
                         updateOrderedWindows();
@@ -457,9 +459,9 @@ public class TabsSuckProjectComponent implements ProjectComponent {
             public void editorReleased(@NotNull EditorFactoryEvent event) {
                 Editor editor = event.getEditor();
                 VirtualFile file = fileFromEditor(editor);
-
-                log.debug("editorReleased(): " + file.getPath());
-
+                if (file != null) {
+                    log.debug("editorReleased(): " + file.getPath());
+                }
                 visibleEditors.remove(editor);
                 updateOrderedEditors();
                 updateOrderedWindows();
@@ -604,7 +606,10 @@ public class TabsSuckProjectComponent implements ProjectComponent {
 
         this.orderedEditors = (ArrayList<Editor>)ordered.clone();
 
-        updateFollowingEditorIndexes(oldOrderedEditors, orderedEditors);
+        //updateFollowingEditorIndexes(oldOrderedEditors, orderedEditors);
+        if (oldOrderedEditors.size() != orderedEditors.size()) {
+            updateNumVisibleEditorsChanged(oldOrderedEditors.size(), orderedEditors.size());
+        }
 
         //debugPrintOrderedEditors();
     }
@@ -682,118 +687,133 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         this.orderedEditorWindows = ordered;
     }
 
-    // looks at oldOrderedEditors and newOrderedEditors, and if they are different sizes
-    // figures out if an editor was added or removed, and at what index.
-    // then shifts any "following" editor indexes up or down accordingly.
-    private void updateFollowingEditorIndexes(ArrayList<Editor> oldOrderedEditors, ArrayList<Editor> newOrderedEditors)
-    {
-        log.debug("updateFollowingEditorIndexes()");
+    // remove all following editor indexes that exceed newNum
+    // update following editors if new editor added
+    private void updateNumVisibleEditorsChanged(int oldNum, int newNum) {
+        log.debug("updateNumVisibleEditorsChanged(), oldNum: " + oldNum + ", newNum: " + newNum);
 
-        // won't handle more than one editor add/remove at a time.
-        // however, its triggered by editorCreated(), so will fire for each editor individually.
-
-        if (newOrderedEditors.size() > oldOrderedEditors.size()) { // an editor was added
-            log.debug("(editor added)");
+        if (newNum < oldNum) {
+            Predicate<Integer> removePredicate = i-> i > newNum;
+            followingEditorIndexes.removeIf(removePredicate);
         }
-        else if (newOrderedEditors.size() < oldOrderedEditors.size()) { // an editor was removed
-            log.debug("(editor removed)");
-        }
-        // nothing changed, or an editor was replaced. no keep to shift following indexes.
+//        else if (newNum > oldNum) {
+//            // TODO: HANDLE
+//            updateFollowingEditors();
+//        }
+    }
 
-
-
-        for (int i=0; i<Math.max(newOrderedEditors.size(), oldOrderedEditors.size()); ++i) {
-
-//            if (i > newOrderedEditors.size()) {
-//                // editor was added (at the end)
-//                followingEditorIndexes.remove(i-1);
+//    // looks at oldOrderedEditors and newOrderedEditors, and if they are different sizes
+//    // figures out if an editor was added or removed, and at what index.
+//    // then shifts any "following" editor indexes up or down accordingly.
+//    private void updateFollowingEditorIndexes(ArrayList<Editor> oldOrderedEditors, ArrayList<Editor> newOrderedEditors)
+//    {
+//        log.debug("updateFollowingEditorIndexes()");
+//
+//        // won't handle more than one editor add/remove at a time.
+//        // however, it's triggered by editorCreated(), so will fire for each editor individually.
+//
+//        if (newOrderedEditors.size() > oldOrderedEditors.size()) { // an editor was added
+//            log.debug("(editor added)");
+//        }
+//        else if (newOrderedEditors.size() < oldOrderedEditors.size()) { // an editor was removed
+//            log.debug("(editor removed)");
+//        }
+//        // nothing changed, or an editor was replaced. no keep to shift following indexes.
+//
+//
+//
+//        for (int i=0; i<Math.max(newOrderedEditors.size(), oldOrderedEditors.size()); ++i) {
+//
+////            if (i > newOrderedEditors.size()) {
+////                // editor was added (at the end)
+////                followingEditorIndexes.remove(i-1);
+////            }
+////            else if (i > newOrderedEditors.size()) {
+////                // editor was removed (from the end)
+////                followingEditorIndexes.remove(i-1);
+////            }
+////            else {
+////
+////            }
+//
+//            Editor n;
+//            try {
+//                n = newOrderedEditors.get(i);
 //            }
-//            else if (i > newOrderedEditors.size()) {
-//                // editor was removed (from the end)
-//                followingEditorIndexes.remove(i-1);
+//            catch (IndexOutOfBoundsException e) {
+//                n = null;
+//            }
+//
+//            Editor o;
+//            try {
+//                o = oldOrderedEditors.get(i);
+//            }
+//            catch (IndexOutOfBoundsException e) {
+//                o = null;
+//            }
+//
+//
+//            if (n != o) {
+//
+//                if (newOrderedEditors.size() > oldOrderedEditors.size()) { // an editor was added
+//                    shiftFollowingEditorsUpAboveIndex(i);
+//                }
+//                else if (newOrderedEditors.size() < oldOrderedEditors.size()) { // an editor was removed
+//                    shiftFollowingEditorsDownBelowIndex(i);
+//                }
+//            }
+//
+//        }
+//    }
+//
+//    private void shiftFollowingEditorsUpAboveIndex(int index) {
+//
+//        log.debug("shiftFollowingEditorsUpAboveIndex(), index: " + index);
+//        log.debug("BEFORE:");
+//        debugPrintFollowingEditorIndexes();
+//
+//        HashSet<Integer> newIndexes = new HashSet<>();
+//
+//        for (Integer i : followingEditorIndexes) {
+//
+//            if (i > index) {
+//                newIndexes.add(++i);
 //            }
 //            else {
-//
+//                newIndexes.add(i);
 //            }
-
-            Editor n;
-            try {
-                n = newOrderedEditors.get(i);
-            }
-            catch (IndexOutOfBoundsException e) {
-                n = null;
-            }
-
-            Editor o;
-            try {
-                o = oldOrderedEditors.get(i);
-            }
-            catch (IndexOutOfBoundsException e) {
-                o = null;
-            }
-
-
-            if (n != o) {
-
-                if (newOrderedEditors.size() > oldOrderedEditors.size()) { // an editor was added
-                    shiftFollowingEditorsUpAboveIndex(i);
-                }
-                else if (newOrderedEditors.size() < oldOrderedEditors.size()) { // an editor was removed
-                    shiftFollowingEditorsDownBelowIndex(i);
-                }
-            }
-
-        }
-    }
-
-    private void shiftFollowingEditorsUpAboveIndex(int index) {
-
-        log.debug("shiftFollowingEditorsUpAboveIndex(), index: " + index);
-        log.debug("BEFORE:");
-        debugPrintFollowingEditorIndexes();
-
-        HashSet<Integer> newIndexes = new HashSet<>();
-
-        for (Integer i : followingEditorIndexes) {
-
-            if (i > index) {
-                newIndexes.add(++i);
-            }
-            else {
-                newIndexes.add(i);
-            }
-        }
-
-        followingEditorIndexes = newIndexes;
-
-        log.debug("AFTER:");
-        debugPrintFollowingEditorIndexes();
-    }
-
-    private void shiftFollowingEditorsDownBelowIndex(int index) {
-
-        log.debug("shiftFollowingEditorsDownBelowIndex(), index: " + index);
-        log.debug("BEFORE:");
-        debugPrintFollowingEditorIndexes();
-
-
-        HashSet<Integer> newIndexes = new HashSet<>();
-
-        for (Integer i : followingEditorIndexes) {
-
-            if (i < index) {
-                newIndexes.add(--i);
-            }
-            else {
-                newIndexes.add(i);
-            }
-        }
-
-        followingEditorIndexes = newIndexes;
-
-        log.debug("AFTER:");
-        debugPrintFollowingEditorIndexes();
-    }
+//        }
+//
+//        followingEditorIndexes = newIndexes;
+//
+//        log.debug("AFTER:");
+//        debugPrintFollowingEditorIndexes();
+//    }
+//
+//    private void shiftFollowingEditorsDownBelowIndex(int index) {
+//
+//        log.debug("shiftFollowingEditorsDownBelowIndex(), index: " + index);
+//        log.debug("BEFORE:");
+//        debugPrintFollowingEditorIndexes();
+//
+//
+//        HashSet<Integer> newIndexes = new HashSet<>();
+//
+//        for (Integer i : followingEditorIndexes) {
+//
+//            if (i < index) {
+//                newIndexes.add(--i);
+//            }
+//            else {
+//                newIndexes.add(i);
+//            }
+//        }
+//
+//        followingEditorIndexes = newIndexes;
+//
+//        log.debug("AFTER:");
+//        debugPrintFollowingEditorIndexes();
+//    }
 
     private VirtualFile fileFromEditor(Editor editor) {
 
