@@ -1,3 +1,4 @@
+
 import com.intellij.ide.actions.EditSourceInNewWindowAction;
 import com.intellij.ide.ui.UISettings;
 import com.intellij.openapi.actionSystem.*;

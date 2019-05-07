@@ -1,3 +1,4 @@
+
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
@@ -28,6 +29,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 import java.util.Timer;
 import java.util.function.Predicate;
+
 
 public class TabsSuckProjectComponent implements ProjectComponent {
 

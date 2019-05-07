@@ -1,7 +1,9 @@
+
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+
 
 public class FocusActionGroup extends DefaultActionGroup {
 
