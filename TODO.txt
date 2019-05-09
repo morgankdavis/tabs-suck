@@ -15,6 +15,8 @@ TODO
     (feature) Stop using "editor indexes"  Do everything relative.
         ("Swap" == "Move")
         Follow -> [Above, Below, Left, Right]
+        Pin Counterpart -> [Above, Below, Left, Right]? "Send Counterpart"
+        Bi-directional CP link?
 
 	(wish) Better handle horizontal splits
 
