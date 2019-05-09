@@ -329,6 +329,10 @@ public class TabsSuckProject implements ProjectComponent {
                     public void showNotify() {
                         VirtualFile file = fileFromEditor(editor);
                         log.debug("*** showNotify(): " + file + " ***");
+                        log.debug("*** showNotify, component: " +  editor.getComponent().hashCode() + " ***");
+                        log.debug("*** showNotify, content component: " +  editor.getContentComponent().hashCode() + " ***");
+                        log.debug("*** showNotify, component parent: " +  editor.getComponent().getParent().hashCode() + " ***");
+                        log.debug("*** showNotify, component parent parent: " +  editor.getComponent().getParent().getParent().hashCode() + " ***");
 
                         if (file != null) {
 

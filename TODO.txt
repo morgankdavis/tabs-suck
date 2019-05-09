@@ -1,5 +1,7 @@
 TODO
 
+    Try attaching "following" bit to EditorWindow // JPanel or JComponent are changing
+            EditotWindowForEditor() FollowingBitForWindow()
 	If editor is not attached to project window, at least allow Switch to Counterpart
     Window -> Editor Tabs has things that don't make sense (and things that should be removed)
 	Namespace everything (don't forget plugin.xml)
