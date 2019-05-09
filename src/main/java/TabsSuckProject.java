@@ -31,7 +31,7 @@ import java.util.Timer;
 import java.util.function.Predicate;
 
 
-public class TabsSuckProjectComponent implements ProjectComponent {
+public class TabsSuckProject implements ProjectComponent {
 
     /*********************************************************************************************
         Types, Properties and iVars
@@ -48,7 +48,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         UNKNOWN
     }
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.TabsSuckProjectComponent");
+    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.TabsSuckProject");
 
     private static final int WAIT_TO_FOCUS_DELAY = 250; // ms
 
@@ -61,20 +61,20 @@ public class TabsSuckProjectComponent implements ProjectComponent {
     private HashSet<Integer> followingEditorIndexes = new HashSet<>();
 
     private ArrayDeque<Triplet<VirtualFile, Integer, Integer>> fileOpenQueue = new ArrayDeque<>(); // file, target, focus (can be -1)
-    HashSet<Editor> waitingForVisibleEditors = new HashSet<>();
-    int nextVisibleEditorFocusIndex = -1;
+    private HashSet<Editor> waitingForVisibleEditors = new HashSet<>();
+    private int nextVisibleEditorFocusIndex = -1;
 
-    PropertiesComponent propertiesComponent = null;
+    private PropertiesComponent propertiesComponent = null;
 
     /*********************************************************************************************
         Lifecycle
      *********************************************************************************************/
 
-    public TabsSuckProjectComponent(Project project) {
+    public TabsSuckProject(Project project) {
 
         this.log.setLevel(Level.DEBUG);
 
-        log.debug("TabsSuckProjectComponent(), project: " + project);
+        log.debug("TabsSuckProject(), project: " + project);
 
         this.project = project;
         this.propertiesComponent = PropertiesComponent.getInstance(this.project);
@@ -88,12 +88,12 @@ public class TabsSuckProjectComponent implements ProjectComponent {
 
     @Override
     public void initComponent() {
-        log.debug("TabsSuckProjectComponent.initComponent()");
+        log.debug("TabsSuckProject.initComponent()");
     }
 
     @Override
     public  void disposeComponent() {
-        log.debug("TabsSuckProjectComponent.disposeComponent()");
+        log.debug("TabsSuckProject.disposeComponent()");
     }
 
     @Override
@@ -113,10 +113,10 @@ public class TabsSuckProjectComponent implements ProjectComponent {
     }
 
     /*********************************************************************************************
-        Public
+        Package-Private
      *********************************************************************************************/
 
-    public void switchToCounterpartAction(int index) {
+    void switchToCounterpartAction(int index) {
 
         log.debug("switchToCounterpartAction(), targetIndex: " + index);
 
@@ -139,7 +139,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         }
     }
 
-    public void openAction(int originIndex, int targetIndex) {
+    void openAction(int originIndex, int targetIndex) {
 
         log.debug("openAction(), originIndex: " + originIndex + ", targetIndex: " + targetIndex);
 
@@ -154,7 +154,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         }
     }
 
-    public void openCounterpartAction(int originIndex, int targetIndex) {
+    void openCounterpartAction(int originIndex, int targetIndex) {
 
         log.debug("openCounterpartAction(), originIndex: " + originIndex + ", targetIndex: " + targetIndex);
 
@@ -177,7 +177,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         }
     }
 
-    public void swapAction(int originIndex, int targetIndex) {
+    void swapAction(int originIndex, int targetIndex) {
 
         log.debug("swapAction(), originIndex: " + originIndex + ", targetIndex: " + targetIndex);
 
@@ -202,7 +202,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         }
     }
 
-    public void focusAction(int targetIndex) {
+    void focusAction(int targetIndex) {
 
         log.debug("focusAction(), targetIndex: " + targetIndex);
 
@@ -216,24 +216,24 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         }
     }
 
-    public void debugAction() {
+    void debugAction() {
 
         log.debug("focusedEditorIndex: " + focusedEditorIndex());
     }
 
-    public int numEditors() {
+    int numEditors() {
 
         return visibleEditors.size();
     }
 
-    public int focusedEditorIndex() {
+    int focusedEditorIndex() {
 
         // TODO: can we use FileEditorManagerEx.getCurrentWindow() + orderedEditors instead?
 
         return focusedEditorIndex;
     }
 
-    public void setFocusedEditorIndex(int index) {
+    void setFocusedEditorIndex(int index) {
 
         log.debug("setFocusedEditorIndex(), index: " + index);
 
@@ -242,20 +242,19 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         fileEditorManager.setCurrentWindow(window);
     }
 
-
-    public int indexOfEditor(Editor editor) {
+    int indexOfEditor(Editor editor) {
 
         return orderedEditors.indexOf(editor);
     }
 
-    public boolean isFollowingFirst(int index) {
+    boolean isFollowingFirst(int index) {
 
         log.debug("isFollowingFirst(), index: " + index);
 
         return followingEditorIndexes.contains(index);
     }
 
-    public void setIsFollowingFirst(int index, boolean following) {
+    void setIsFollowingFirst(int index, boolean following) {
 
         log.debug("setIsFollowingFirst(), index: " + index + ", " + (following ? "true" : "false"));
 
@@ -269,7 +268,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         }
     }
 
-    public boolean isEditorAttachedToProjectWindow(Editor editor) {
+    boolean isEditorAttachedToProjectWindow(Editor editor) {
         //log.debug("editorIsInProjectWindow()");
 
         Component parentComponent = editor.getComponent().getParent();
@@ -290,7 +289,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         Private
      *********************************************************************************************/
 
-    public void addEditorFactoryListener() {
+    private void addEditorFactoryListener() {
 
         log.debug("addEditorFactoryListener()");
 
@@ -336,7 +335,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
                             if (isEditorAttachedToProjectWindow(editor)) {
                                 visibleEditors.add(editor);
                             }
-                            updateOrderedEditors();
+                            updateOrderedEditors(file);
                             updateOrderedWindows();
 
                             int editorIndex = indexOfEditor(editor);
@@ -438,7 +437,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
                             log.debug("hideNotify(): " + file);
                         }
                         visibleEditors.remove(editor);
-                        updateOrderedEditors();
+                        updateOrderedEditors(null);
                         updateOrderedWindows();
                     }
                 };
@@ -465,7 +464,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
                     log.debug("editorReleased(): " + file.getPath());
                 }
                 visibleEditors.remove(editor);
-                updateOrderedEditors();
+                updateOrderedEditors(null);
                 updateOrderedWindows();
             }
         };
@@ -476,6 +475,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
 
     // used in EditorFactoryListener.editorCreated()
     // looks at the stack to see what initiated the creation of the editor
+    // this is asking to break in future versions, but it's about all we can do...
     private UPDATE_SOURCE currentUpdateSource() {
 
         UPDATE_SOURCE source = UPDATE_SOURCE.UNKNOWN;
@@ -522,7 +522,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
         return source;
     }
 
-    void updateFollowingEditors(VirtualFile sourceFile, int focus) {
+    private void updateFollowingEditors(VirtualFile sourceFile, int focus) {
 
         VirtualFile counterpartFile = counterpartForFile(sourceFile);
         if (counterpartFile != null) {
@@ -542,7 +542,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
     }
 
     // looks at this.visibleEditors, orders them, and updates this.orderedEditors
-    private void updateOrderedEditors() {
+    private void updateOrderedEditors(VirtualFile newlyVisibleFile) {
 
         log.debug("updateOrderedEditors()");
 
@@ -610,7 +610,7 @@ public class TabsSuckProjectComponent implements ProjectComponent {
 
         //updateFollowingEditorIndexes(oldOrderedEditors, orderedEditors);
         if (oldOrderedEditors.size() != orderedEditors.size()) {
-            updateNumVisibleEditorsChanged(oldOrderedEditors.size(), orderedEditors.size());
+            updateNumVisibleEditorsChanged(oldOrderedEditors.size(), orderedEditors.size(), newlyVisibleFile);
         }
 
         //debugPrintOrderedEditors();
@@ -691,131 +691,19 @@ public class TabsSuckProjectComponent implements ProjectComponent {
 
     // remove all following editor indexes that exceed newNum
     // update following editors if new editor added
-    private void updateNumVisibleEditorsChanged(int oldNum, int newNum) {
+    private void updateNumVisibleEditorsChanged(int oldNum, int newNum, VirtualFile newlyVisibleFile) {
         log.debug("updateNumVisibleEditorsChanged(), oldNum: " + oldNum + ", newNum: " + newNum);
 
         if (newNum < oldNum) {
             Predicate<Integer> removePredicate = i-> i > newNum;
             followingEditorIndexes.removeIf(removePredicate);
         }
-//        else if (newNum > oldNum) {
-//            // TODO: HANDLE
-//            updateFollowingEditors();
-//        }
+        else if (newNum > oldNum) {
+            if (orderedEditors.size() > 0) {
+                updateFollowingEditors(fileFromEditor(orderedEditors.get(0)), -1);
+            }
+        }
     }
-
-//    // looks at oldOrderedEditors and newOrderedEditors, and if they are different sizes
-//    // figures out if an editor was added or removed, and at what index.
-//    // then shifts any "following" editor indexes up or down accordingly.
-//    private void updateFollowingEditorIndexes(ArrayList<Editor> oldOrderedEditors, ArrayList<Editor> newOrderedEditors)
-//    {
-//        log.debug("updateFollowingEditorIndexes()");
-//
-//        // won't handle more than one editor add/remove at a time.
-//        // however, it's triggered by editorCreated(), so will fire for each editor individually.
-//
-//        if (newOrderedEditors.size() > oldOrderedEditors.size()) { // an editor was added
-//            log.debug("(editor added)");
-//        }
-//        else if (newOrderedEditors.size() < oldOrderedEditors.size()) { // an editor was removed
-//            log.debug("(editor removed)");
-//        }
-//        // nothing changed, or an editor was replaced. no keep to shift following indexes.
-//
-//
-//
-//        for (int i=0; i<Math.max(newOrderedEditors.size(), oldOrderedEditors.size()); ++i) {
-//
-////            if (i > newOrderedEditors.size()) {
-////                // editor was added (at the end)
-////                followingEditorIndexes.remove(i-1);
-////            }
-////            else if (i > newOrderedEditors.size()) {
-////                // editor was removed (from the end)
-////                followingEditorIndexes.remove(i-1);
-////            }
-////            else {
-////
-////            }
-//
-//            Editor n;
-//            try {
-//                n = newOrderedEditors.get(i);
-//            }
-//            catch (IndexOutOfBoundsException e) {
-//                n = null;
-//            }
-//
-//            Editor o;
-//            try {
-//                o = oldOrderedEditors.get(i);
-//            }
-//            catch (IndexOutOfBoundsException e) {
-//                o = null;
-//            }
-//
-//
-//            if (n != o) {
-//
-//                if (newOrderedEditors.size() > oldOrderedEditors.size()) { // an editor was added
-//                    shiftFollowingEditorsUpAboveIndex(i);
-//                }
-//                else if (newOrderedEditors.size() < oldOrderedEditors.size()) { // an editor was removed
-//                    shiftFollowingEditorsDownBelowIndex(i);
-//                }
-//            }
-//
-//        }
-//    }
-//
-//    private void shiftFollowingEditorsUpAboveIndex(int index) {
-//
-//        log.debug("shiftFollowingEditorsUpAboveIndex(), index: " + index);
-//        log.debug("BEFORE:");
-//        debugPrintFollowingEditorIndexes();
-//
-//        HashSet<Integer> newIndexes = new HashSet<>();
-//
-//        for (Integer i : followingEditorIndexes) {
-//
-//            if (i > index) {
-//                newIndexes.add(++i);
-//            }
-//            else {
-//                newIndexes.add(i);
-//            }
-//        }
-//
-//        followingEditorIndexes = newIndexes;
-//
-//        log.debug("AFTER:");
-//        debugPrintFollowingEditorIndexes();
-//    }
-//
-//    private void shiftFollowingEditorsDownBelowIndex(int index) {
-//
-//        log.debug("shiftFollowingEditorsDownBelowIndex(), index: " + index);
-//        log.debug("BEFORE:");
-//        debugPrintFollowingEditorIndexes();
-//
-//
-//        HashSet<Integer> newIndexes = new HashSet<>();
-//
-//        for (Integer i : followingEditorIndexes) {
-//
-//            if (i < index) {
-//                newIndexes.add(--i);
-//            }
-//            else {
-//                newIndexes.add(i);
-//            }
-//        }
-//
-//        followingEditorIndexes = newIndexes;
-//
-//        log.debug("AFTER:");
-//        debugPrintFollowingEditorIndexes();
-//    }
 
     private VirtualFile fileFromEditor(Editor editor) {
 

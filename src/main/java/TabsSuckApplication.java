@@ -40,13 +40,13 @@ import java.util.List;
 //    ...
 //
 
-public class TabsSuckApplicationComponent implements ApplicationComponent {
+public class TabsSuckApplication implements ApplicationComponent {
 
     /*********************************************************************************************
         Types, Properties and iVars
      *********************************************************************************************/
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.TabsSuckApplicationComponent");
+    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.TabsSuckApplication");
 
     private static final int MAX_EDITORS = 12;
 
@@ -79,7 +79,7 @@ public class TabsSuckApplicationComponent implements ApplicationComponent {
 
         this.log.setLevel(Level.DEBUG);
 
-        log.debug("TabsSuckApplicationComponent.initComponent()");
+        log.debug("TabsSuckApplication.initComponent()");
 
         UISettings.getInstance().setEditorTabPlacement(UISettings.TABS_NONE);
 
@@ -90,7 +90,7 @@ public class TabsSuckApplicationComponent implements ApplicationComponent {
 
     @Override
     public  void disposeComponent() {
-        log.debug("TabsSuckApplicationComponent.disposeComponent()");
+        log.debug("TabsSuckApplication.disposeComponent()");
     }
 
     /*********************************************************************************************

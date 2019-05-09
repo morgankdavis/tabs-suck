@@ -23,7 +23,7 @@ public class NewWindowAction extends EditSourceInNewWindowAction {
         super.update(event);
 
         Project project = event.getProject();
-        TabsSuckProjectComponent projectComponent = project.getComponent(TabsSuckProjectComponent.class);
+        TabsSuckProject projectComponent = project.getComponent(TabsSuckProject.class);
         if (projectComponent != null) {
             Editor editor = event.getData(CommonDataKeys.EDITOR);
             if (editor != null) {

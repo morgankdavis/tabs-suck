@@ -21,7 +21,7 @@ public class SwitchToCounterpartAction extends AnAction {
     public void update(AnActionEvent event) {
 
         Project project = event.getProject();
-        TabsSuckProjectComponent projectComponent = project.getComponent(TabsSuckProjectComponent.class);
+        TabsSuckProject projectComponent = project.getComponent(TabsSuckProject.class);
 
         if (projectComponent != null) {
             Editor editor = event.getData(CommonDataKeys.EDITOR);
@@ -51,7 +51,7 @@ public class SwitchToCounterpartAction extends AnAction {
         Project project = event.getProject();
         log.debug("SwitchToCounterpartAction.actionPerformed(), project: " + project);
 
-        TabsSuckProjectComponent projectComponent = project.getComponent(TabsSuckProjectComponent.class);
+        TabsSuckProject projectComponent = project.getComponent(TabsSuckProject.class);
         if (projectComponent != null) {
             Editor editor = event.getData(CommonDataKeys.EDITOR);
             if (editor != null) {

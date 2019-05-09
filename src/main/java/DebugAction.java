@@ -16,7 +16,7 @@ public class DebugAction extends AnAction {
         log.debug("DebugAction.actionPerformed()");
 
         Project project = event.getProject();
-        TabsSuckProjectComponent projectComponent = project.getComponent(TabsSuckProjectComponent.class);
+        TabsSuckProject projectComponent = project.getComponent(TabsSuckProject.class);
         if (projectComponent != null) {
             projectComponent.debugAction();
         }

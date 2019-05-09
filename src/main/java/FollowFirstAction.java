@@ -31,7 +31,7 @@ public class FollowFirstAction extends AnAction {
     public void update(AnActionEvent event) {
 
         Project project = event.getProject();
-        TabsSuckProjectComponent projectComponent = project.getComponent(TabsSuckProjectComponent.class);
+        TabsSuckProject projectComponent = project.getComponent(TabsSuckProject.class);
 
         if (projectComponent != null) {
             Editor editor = event.getData(CommonDataKeys.EDITOR);
@@ -89,7 +89,7 @@ public class FollowFirstAction extends AnAction {
         Project project = event.getProject();
         log.debug("FollowFirstAction.actionPerformed(), project: " + project);
 
-        TabsSuckProjectComponent projectComponent = (TabsSuckProjectComponent)project.getComponent(TabsSuckProjectComponent.class);
+        TabsSuckProject projectComponent = (TabsSuckProject)project.getComponent(TabsSuckProject.class);
         if (projectComponent != null) {
             Editor editor = event.getData(CommonDataKeys.EDITOR);
             if (editor != null) {

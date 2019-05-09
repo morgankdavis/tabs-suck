@@ -1,12 +1,7 @@
 TODO
 
-    Handle editor open & close (close done) for following indexes
 	If editor is not attached to project window, at least allow Switch to Counterpart
     Window -> Editor Tabs has things that don't make sense (and things that should be removed)
-	Save following indexes
-		http://www.jetbrains.org/intellij/sdk/docs/basics/persisting_state_of_components.html
-		https://intellij-support.jetbrains.com/hc/en-us/community/posts/206109179-Module-based-PersistenStateComponent-not-saving-state-to-iml-file
-	Check tracking multiple projects
 	Namespace everything (don't forget plugin.xml)
 	DISABLE VERBOSE LOGGING
 	PUBLISH
@@ -15,9 +10,17 @@ TODO
 	(feature) Show "Following First" indication in Breadcrumbs
 	(feature) Put applicable actions in the project tree context menu
 
+    (feature) Stop using "editor indexes"  Do everything relative.
+        ("Swap" == "Move")
+        Follow -> [Above, Below, Left, Right]
+
 	(wish) Better handle horizontal splits
 
-	(maybe?) Stop using "editor indexes"  Get rid of "following" and do everything relative. "Swap" == "Move"
+	(maybe?) Save following indexes?
+		http://www.jetbrains.org/intellij/sdk/docs/basics/persisting_state_of_components.html
+		https://intellij-support.jetbrains.com/hc/en-us/community/posts/206109179-Module-based-PersistenStateComponent-not-saving-state-to-iml-file
+	Check tracking multiple projects
+
 
 NOTES
 

@@ -18,8 +18,8 @@ public class OpenCounterpartActionGroup extends DefaultActionGroup {
     public void update(AnActionEvent event) {
 
         Project project = event.getProject();
-        TabsSuckProjectComponent projectComponent = project.getComponent(TabsSuckProjectComponent.class);
-        TabsSuckApplicationComponent applicationComponent = project.getComponent(TabsSuckApplicationComponent.class);
+        TabsSuckProject projectComponent = project.getComponent(TabsSuckProject.class);
+        TabsSuckApplication applicationComponent = project.getComponent(TabsSuckApplication.class);
 
         if (projectComponent != null) {
             if (applicationComponent != null) {

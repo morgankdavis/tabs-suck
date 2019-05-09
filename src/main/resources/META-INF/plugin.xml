@@ -19,14 +19,14 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <projectService serviceInterface="TabsSuckProjectComponent"
-                        serviceImplementation="TabsSuckProjectComponent"/> <!-- needed for PropertiesComponent -->
+        <projectService serviceInterface="TabsSuckProject"
+                        serviceImplementation="TabsSuckProject"/> <!-- needed for PropertiesComponent -->
     </extensions>
 
     <application-components>
         <component>
             <!-- Interface and implementation classes are the same -->
-            <implementation-class>TabsSuckApplicationComponent</implementation-class>
+            <implementation-class>TabsSuckApplication</implementation-class>
 
         </component>
     </application-components>
@@ -34,7 +34,7 @@
     <project-components>
         <component>
             <!-- Interface and implementation classes are the same -->
-            <implementation-class>TabsSuckProjectComponent</implementation-class>
+            <implementation-class>TabsSuckProject</implementation-class>
 
             <!-- If the "workspace" option is set "true", the component
                  saves its state to the .iws file instead of the .ipr file.
