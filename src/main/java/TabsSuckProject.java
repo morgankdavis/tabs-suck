@@ -818,6 +818,8 @@ public class TabsSuckProject implements ProjectComponent {
 
         ArrayList<String> counterpartExtensions = new ArrayList<>();
 
+        // note: .C, .inl, .tcc
+
         if (extension.equals("h")) {
 
             counterpartExtensions.add("c");
