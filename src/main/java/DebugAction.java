@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project;
 
 public class DebugAction extends AnAction {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.FollowFirstAction");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.FollowFirstAction");
 
 
     @Override

@@ -24,12 +24,3 @@ TODO
 		http://www.jetbrains.org/intellij/sdk/docs/basics/persisting_state_of_components.html
 		https://intellij-support.jetbrains.com/hc/en-us/community/posts/206109179-Module-based-PersistenStateComponent-not-saving-state-to-iml-file
 	Check tracking multiple projects
-
-
-NOTES
-
-	PLUGIN DEV FORUM: https://intellij-support.jetbrains.com/hc/en-us/community/topics/200366979-IntelliJ-IDEA-Open-API-and-Plugin-Development
-	https://intellij-support.jetbrains.com/hc/en-us/community/topics/200366979-IntelliJ-IDEA-Open-API-and-Plugin-Development
-	https://intellij-support.jetbrains.com/hc/en-us/community/posts/360002869640-Get-VirtualFile-from-Editor
-	https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001940480-How-to-close-reopen-an-editor-while-preserving-its-position-in-split-panes-
-	log: tail -f ~/tabs-suck/build/idea-sandbox/system/log/idea.log | grep Tabs

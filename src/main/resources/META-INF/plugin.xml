@@ -1,11 +1,18 @@
 <idea-plugin>
-    <id>net.morgankdavis.TabsSuck</id>
+    <id>net.mkd.TabsSuck</id>
     <name>Tabs Suck!</name>
-    <vendor email="mkd@marbles.xyz" url="http://www.morgankdavis.net">Morgan K. Davis</vendor>
+    <vendor email="mkd@mkd.net" url="http://www.mkd.net">Morgan K. Davis</vendor>
+    <version>20210313</version>
 
     <description><![CDATA[
-    Tabs suck!  Splits rule!.<br>
+    Tabs suck!  Splits rule!  I am padding this out to 40 characters.<br>
     ]]></description>
+
+    <change-notes><![CDATA[
+      Version 1.0<br>
+      <em>Meh</em>
+    ]]>
+    </change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
@@ -14,7 +21,8 @@
     -->
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="CL-2018.3" until-build="CL-2019.*"/>
+    <idea-version since-build="C-203.6682.168"/>
+
     <depends>com.intellij.modules.clion</depends>
 
     <extensions defaultExtensionNs="com.intellij">

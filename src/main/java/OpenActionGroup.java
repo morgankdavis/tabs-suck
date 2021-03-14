@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project;
 
 public class OpenActionGroup extends DefaultActionGroup {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.OpenActionGroup");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.OpenActionGroup");
 
 
     public OpenActionGroup() {

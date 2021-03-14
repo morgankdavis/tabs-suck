@@ -3,11 +3,11 @@
 
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.4.3'
+    id 'org.jetbrains.intellij' version '0.4.8'
 }
 
-group 'net.morgankdavis'
-version '1.0-SNAPSHOT'
+group 'net.mkd'
+version '20210313'
 
 sourceCompatibility = 1.8
 
@@ -25,7 +25,7 @@ dependencies {
 //}
 
 intellij {
-    version 'LATEST-EAP-SNAPSHOT'
+    version '2020.3.1'
     type 'CL'
 }
 

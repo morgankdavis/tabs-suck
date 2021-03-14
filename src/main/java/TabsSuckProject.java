@@ -48,7 +48,7 @@ public class TabsSuckProject implements ProjectComponent {
         UNKNOWN
     }
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.TabsSuckProject");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.TabsSuckProject");
 
     private static final int WAIT_TO_FOCUS_DELAY = 250; // ms
 
@@ -100,7 +100,7 @@ public class TabsSuckProject implements ProjectComponent {
     public void projectOpened() {
         log.debug("projectOpened()");
 
-//        followingEditorsBitmask = propertiesComponent.getInt("net.morgankdavis.TabsSuck.followingEditorsBitmask", 0);
+//        followingEditorsBitmask = propertiesComponent.getInt("net.mkdTabsSuck.followingEditorsBitmask", 0);
 //        log.debug("Restored followingEditorsBitmask: " + Integer.toBinaryString(followingEditorsBitmask));
     }
 
@@ -109,7 +109,7 @@ public class TabsSuckProject implements ProjectComponent {
         log.debug("projectClosed()");
 
 //        log.debug("Saving followingEditorsBitmask: " + Integer.toBinaryString(followingEditorsBitmask));
-//        propertiesComponent.setValue("net.morgankdavis.TabsSuck.followingEditorsBitmask", followingEditorsBitmask, 0);
+//        propertiesComponent.setValue("net.mkdTabsSuck.followingEditorsBitmask", followingEditorsBitmask, 0);
     }
 
     /*********************************************************************************************

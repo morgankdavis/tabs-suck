@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project;
 
 public class FocusAction extends AnAction {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.FocusAction");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.FocusAction");
     private int targetIndex;
 
 

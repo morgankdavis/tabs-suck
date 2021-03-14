@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project;
 
 public class NewWindowAction extends EditSourceInNewWindowAction {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.NewWindowAction");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.NewWindowAction");
 
 
     public NewWindowAction() {

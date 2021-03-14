@@ -46,7 +46,7 @@ public class TabsSuckApplication implements ApplicationComponent {
         Types, Properties and iVars
      *********************************************************************************************/
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.TabsSuckApplication");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.TabsSuckApplication");
 
     private static final int MAX_EDITORS = 12;
 

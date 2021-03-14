@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project;
 
 public class FocusActionGroup extends DefaultActionGroup {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.FocusActionGroup");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.FocusActionGroup");
 
 
     public FocusActionGroup() {

@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project;
 
 public class OpenAction extends AnAction {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.OpenAction");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.OpenAction");
     private int targetIndex;
 
 

@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project;
 
 public class FollowFirstAction extends AnAction {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.FollowFirstAction");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.FollowFirstAction");
 
     static final String FOLLOW_TITLE = "Follow First Editor";
     static final String UNFOLLOW_TITLE = "Unfollow First Editor";

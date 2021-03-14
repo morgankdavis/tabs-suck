@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project;
 
 public class OpenCounterpartAction extends AnAction {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.OpenCounterpartAction");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.OpenCounterpartAction");
     private int targetIndex;
 
 

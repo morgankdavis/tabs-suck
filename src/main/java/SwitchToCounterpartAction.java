@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project;
 
 public class SwitchToCounterpartAction extends AnAction {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.SwitchToCounterpartAction");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.SwitchToCounterpartAction");
 
 
     public SwitchToCounterpartAction() {

@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project;
 
 public class SwapAction extends AnAction {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.SwapAction");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.SwapAction");
     private int targetIndex;
 
 

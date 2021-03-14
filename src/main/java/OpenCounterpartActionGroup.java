@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project;
 
 public class OpenCounterpartActionGroup extends DefaultActionGroup {
 
-    private static final Logger log = Logger.getInstance("net.morgankdavis.TabsSuck.OpenCounterpartActionGroup");
+    private static final Logger log = Logger.getInstance("net.mkd.TabsSuck.OpenCounterpartActionGroup");
 
 
     public OpenCounterpartActionGroup() {
